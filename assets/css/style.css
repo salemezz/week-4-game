@@ -13,7 +13,11 @@
 .sub-container {
     height: 158px;
 }
-
+#restartButton{
+    position: relative;
+    left: 975px;
+    top: 630px;
+}
 .btn-img {
     height: 60px;
     width: auto;
