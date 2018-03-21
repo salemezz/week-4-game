@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  </head>
+
+  <body>
+     
+    
+
+
+              <div class="container">
+                <div class="row">
+
+              <div id="characterSelection" class="col-lg-8 button-container">
+                        
+                <h4>Your Character</h4>
+                    <button id="obiButton" class="btn"><a>Obi-Wan</a><br><img class="btn-img" src="assets/images/obi.jpg" alt="Responsive image"><div id="obiHealth">120</div></button>
+                    <button id="lukeButton" class="btn"><a>Skywalker</a><br><img class="btn-img" src="assets/images/luke.png" alt="Responsive image"><div id="lukeHealth">100</div></button>
+                    <button id="sidiousButton" class="btn"><a>Sidious</a><br><img class="btn-img" src="assets/images/sidious.png" alt="Responsive image"><div id="sidiousHealth">150</div></button>
+                    <button id="maulButton" class="btn"><a>Maul</a><br><img class="btn-img" src="assets/images/maul.jpg" alt="Responsive image"><div id="maulHealth">180</div></button>
+                    </div>
+                  </div>
+
+                  <div class="hidden" id="enemyZone"><h4>Select Opponent</h4></div>
+          </div>
+        
+
+    
+   <script>
+
+$(document).ready(function() {
+
+var game = {
+characterSelection: function () {
+
+  $( "#obiButton" ).one("click", function () {
+    $( "#lukeButton",  )
+    .animate({top: "+=200px"})
+    .animate({left: "-=156px"})
+    .off()
+    $( "#sidiousButton",  )
+    .animate({top: "+=200px"})
+    .animate({left: "-=156px"})
+    .off()
+    $( "#maulButton",  )
+    .animate({top: "+=200px"})
+    .animate({left: "-=156px"})
+    .off()
+  });
+
+  $( "#lukeButton" ).one("click", function() {
+    $( "#obiButton",  )
+    .animate({top: "+=200px"})
+    .off()
+    $( "#sidiousButton",  )
+    .animate({top: "+=200px"})
+    .animate({left: "-=156px"})
+    .off()
+    $( "#maulButton",  )
+    .animate({top: "+=200px"})
+    .animate({left: "-=156px"})  
+    .off()
+  });
+
+    $( "#sidiousButton" ).one("click", function() {
+    $( "#obiButton",  )
+    .animate({top: "+=200px"})
+    .off()
+    $( "#lukeButton",  )
+    .animate({top: "+=200px"})
+    .off()
+    $( "#maulButton",  )
+    .animate({top: "+=200px"})
+    .animate({left: "-=156px"})
+    .off()
+  });
+
+    $( "#maulButton" ).one("click", function() {
+    $( "#obiButton",  )
+    .animate({top: "+=200px"})
+    .off()
+    $( "#lukeButton",  )
+    .animate({top: "+=200px"})
+    .off()
+    $( "#sidiousButton",  )
+    .animate({top: "+=200px"}) 
+    .off()
+  });
+
+},
+
+// enemySelection: function () {
+//     $( "#lukeButton" ).one("click", function() {
+//     $( "#lukeButton",  )
+//     .animate({top: "+=200px"})
+//   });
+// },
+};
+
+
+
+//   $( "#enemyZone" ).show( "slow" );
+// }
+
+game.characterSelection();
+$( "body" ).off( "click", game.enemySelection() );
+});
+
+  
+
+
+
+
+
+ 
+     </script>
+
+  </body>
+</html>
+
+

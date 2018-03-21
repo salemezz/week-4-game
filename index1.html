@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  </head>
+
+  <body background="assets/images/bg.jpg">
+    <!-- notes: track oponents defeated -->
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 button-container">
+                    <div id="characterSelection" class="sub-container"><h4>Your Character</h4>
+                        <button id="obiButton" class="btn"><a>Obi-Wan</a><br><img class="btn-img" src="assets/images/obi.jpg" alt="Responsive image"><div class="health">120</div></button>
+                        <button id="lukeButton" class="btn"><a>Skywalker</a><br><img class="btn-img" src="assets/images/luke.png" alt="Responsive image"><div class="health">100</div></button>
+                        <button id="sidiousButton" class="btn"><a>Sidious</a><br><img class="btn-img" src="assets/images/sidious.png" alt="Responsive image"><div class="health">150</div></button>
+                        <button id="maulButton" class="btn"><a>Maul</a><br><img class="btn-img" src="assets/images/maul.jpg" alt="Responsive image"><div class="health">180</div></button>
+                    </div>
+                    
+    
+                    <div id="enemyZone" class="sub-container"><h4>Opponents</h4>
+                        <button id="enemyObiButton" class="btn hidden"><a>Obi-Wan</a><br><img class="btn-img" src="assets/images/obi.jpg" alt="Responsive image"><div class="health">120</div></button>
+                        <button id="enemyLukeButton" class="btn hidden"><a>Skywalker</a><br><img class="btn-img" src="assets/images/luke.png" alt="Responsive image"><div class="health">100</div></button>
+                        <button id="enemySidiousButton" class="btn hidden"><a>Sidious</a><br><img class="btn-img" src="assets/images/sidious.png" alt="Responsive image"><div class="health">150</div></button>
+                        <button id="enemyMaulButton" class="btn hidden"><a>Maul</a><br><img class="btn-img" src="assets/images/maul.jpg" alt="Responsive image"><div class="health">180</div></button>
+                    </div>
+                
+                    <div id="defenderZone" class="sub-container"><h4>Defender</h4>
+                        <button id="defenderObiButton" class="btn hidden"><a>Obi-Wan</a><br><img class="btn-img" src="assets/images/obi.jpg" alt="Responsive image"><div class="health">120</div></button>
+                        <button id="defenderLukeButton" class="btn hidden"><a>Skywalker</a><br><img class="btn-img" src="assets/images/luke.png" alt="Responsive image"><div class="health">100</div></button>
+                        <button id="defenderSidiousButton" class="btn hidden"><a>Sidious</a><br><img class="btn-img" src="assets/images/sidious.png" alt="Responsive image"><div class="health">150</div></button>
+                        <button id="defenderMaulButton" class="btn hidden"><a>Maul</a><br><img class="btn-img" src="assets/images/maul.jpg" alt="Responsive image"><div class="health">180</div></button>
+                    </div>
+            </div>
+                <div id="message" class="col-sm-4"> 
+                    <h6>Game Message:</h6> 
+                    <p id=characterAction></p>
+                    <p id=defenderAction></p>
+                    <p id=gameAction></p>
+            </div>
+        </div>
+        
+
+    
+   <script>
+
+$(document).ready(function() {
+
+    var game = {
+        initialize: function () {
+        
+        var obiWan = {
+            healthPoints: 120,
+            attackPower: 9,
+            baseAttackPower: 5,
+            counterAttackPower: 10
+        };
+        var luke = {
+            healthPoints: 100,
+            attackPower: 10,
+            baseAttackPower: 8, 
+            counterAttackPower: 10
+        };
+        var sidious = {
+            healthPoints: 150,
+            attackPower: 8,
+            baseAttackPower: 6, 
+            counterAttackPower: 10
+        };
+        var maul = {
+            healthPoints: 180,
+            attackPower: 8,
+            baseAttackPower: 4, 
+            counterAttackPower: 10
+        };
+       
+        var selectedCharacter = undefined;
+        var selectedCharacterHtml = undefined;
+        var selectedDefender = undefined;
+        var selectedDefenderHtml = undefined;
+        var selectedCharacterButton = undefined;
+        var remainingOponents = 3;
+    
+
+        $("#gameAction").html("Select a Character.")
+
+
+        function decreaseCharacterHealth() {
+            if(selectedCharacterHtml && selectedCharacter) {
+                selectedCharacter.healthPoints -= selectedDefender.counterAttackPower;
+                $(selectedCharacterHtml).find(".health").text(selectedCharacter.healthPoints);   
+            }
+            if (selectedCharacter.healthPoints <= 0) {
+                $(selectedCharacterHtml).hide();
+                $("#gameAction").html("YOU DIED.");                                             
+            }
+
+        };
+        function decreaseDefenderHealth() {
+            if(selectedDefender && selectedCharacterHtml) {
+                selectedDefender.healthPoints -= selectedCharacter.attackPower;
+                $(selectedDefenderHtml).find(".health").text(selectedDefender.healthPoints)
+                selectedCharacter.attackPower += selectedCharacter.baseAttackPower;
+            }  
+        };
+        function youWin() {
+            if (remainingOponents <= 0) {
+                $("#gameAction").html("YOU WIN.");
+            }
+        }
+
+        // if (allOponents.healthPoints = 0) {
+        //         $("#gameAction").html("YOU WIN."); 
+        //     }
+        // function attackPowerIncrease() {
+
+        // }
+
+// Character Selection
+            $( "#obiButton" ).one("click", function () {
+                $( "#characterSelection button" ).not(" #obiButton").hide();
+                $( "#enemyZone button" ).not("#enemyObiButton").removeClass("hidden");
+                $("#gameAction").html("Select an Opponent.")
+                selectedCharacter = obiWan;
+                selectedCharacterHtml = $(this);
+            });
+            $( "#lukeButton" ).one("click", function () {
+                $( "#characterSelection button" ).not(" #lukeButton").hide();
+                $( "#enemyZone button" ).not("#enemyLukeButton").removeClass("hidden");
+                $("#gameAction").html("Select an Opponent.")
+                selectedCharacter = luke;
+                selectedCharacterHtml = $(this);
+            });
+            $( "#sidiousButton" ).one("click", function () {
+                $( "#characterSelection button" ).not(" #sidiousButton").hide();
+                $( "#enemyZone button" ).not("#enemySidiousButton").removeClass("hidden");
+                $("#gameAction").html("Select an Opponent.")
+                selectedCharacter = sidous;
+                selectedCharacterHtml = $(this);
+            });
+            $( "#maulButton" ).one("click", function () {
+                $( "#characterSelection button" ).not(" #maulButton").hide();
+                $( "#enemyZone button" ).not("#enemyMaulButton").removeClass("hidden");
+                $("#gameAction").html("Select an Opponent.")
+                selectedCharacter = sidous;
+                selectedCharacterHtml = $(this);
+            });
+// Enemy Selection
+            $( "#lukeButton" ).one("click", function () {
+                $( "#characterSelection button" ).not(" #lukeButton").hide();
+                $( "#enemyZone button" ).not("#enemyLukeButton").removeClass("hidden");
+            });
+            $("#enemyLukeButton").one("click", function() {
+                $("#enemyLukeButton").hide()
+                $("#defenderLukeButton").removeClass("hidden");
+                $("#gameAction").html("Click Luke to attack him, and be careful.")
+                
+                selectedDefender = luke;
+                selectedDefenderHtml = $("#defenderLukeButton")
+            });   
+
+            $( "#obiButton" ).one("click", function () {
+                $( "#characterSelection button" ).not("#obiButton").hide();
+                $( "#enemyZone button" ).not("#enemyObiButton").removeClass("hidden");
+            });
+            $("#enemyObiButton").one("click", function() {
+                $("#enemyObiButton").hide()
+                $("#defenderObiButton").removeClass("hidden");
+                $("#gameAction").html("Click Obi to attack him, and be careful.");
+                
+                selectedDefender = obiWan;
+                selectedDefenderHtml = $("#defenderObiButton");
+            });
+
+            $( "#sidiousButton" ).one("click", function () {
+                $( "#characterSelection button" ).not("#sidiousButton").hide();
+                $( "#enemyZone button" ).not("#enemySidiousButton").removeClass("hidden");
+            })
+
+            $("#enemySidiousButton").one("click", function() {
+                $("#enemySidiousButton").hide()
+                $("#defenderSidiousButton").removeClass("hidden");
+                $("#gameAction").html("Click Sidious to attack him, and be careful.");
+                
+                selectedDefender = sidious;
+                selectedDefenderHtml = $("#defenderSidiousButton");
+            });
+
+            $( "#maulButton" ).one("click", function () {
+                $( "#characterSelection button" ).not("#maulButton").hide();
+                $( "#enemyZone button" ).not("#enemyMaulButton").removeClass("hidden");
+            })
+
+            $("#enemyMaulButton").one("click", function() {
+                $("#enemyMaulButton").hide()
+                $("#defenderMaulButton").removeClass("hidden");
+                $("#gameAction").html("Click Obi to attack him, and be careful.");
+                
+                selectedDefender = maul;
+                selectedDefenderHtml = $("#defenderMaulButton");
+            });
+
+            
+// Attack Enemy
+            $("#defenderLukeButton").on("click", function() {
+                decreaseDefenderHealth();               
+                if(luke.healthPoints <= 0) {
+                    remainingOponents--;
+                    $("#defenderLukeButton").hide();
+                    $("#gameAction").html("You defeated Luke, choose another opponenet.");
+                    youWin();
+                }
+
+                else {
+                    decreaseCharacterHealth();
+                }
+            });
+            $("#defenderObiButton").on("click", function() {
+                decreaseDefenderHealth();               
+                if(obiWan.healthPoints <= 0) {
+                    remainingOponents--;
+                    $("#defenderObiButton").hide();
+                    $("#gameAction").html("You defeated Obi, choose another opponenet.");
+                    youWin();
+                }
+                else {
+                    decreaseCharacterHealth();
+                }
+            });
+
+            $("#defenderSidiousButton").on("click", function() {
+                decreaseDefenderHealth();               
+                if(sidious.healthPoints <= 0) {
+                    remainingOponents--;
+                    $("#defenderSidiousButton").hide();
+                    $("#gameAction").html("You defeated Sidious, choose another opponenet.");
+                }
+                else {
+                    decreaseCharacterHealth();
+                }
+            }); 
+
+            $("#defenderMaulButton").on("click", function() {
+                decreaseDefenderHealth();               
+                if(maul.healthPoints <= 0) {
+                    remainingOponents--;
+                    $("#defenderMaulButton").hide();
+                    $("#gameAction").html("You defeated Maul, choose another opponenet.");
+                    youWin();
+                }
+                                else {
+                    decreaseCharacterHealth();
+                }
+            });                                    
+        }
+    }
+
+    game.initialize();
+ });
+ 
+     </script>
+
+  </body>
+</html>
+
+

@@ -1,0 +1,65 @@
+
+.btn{
+    width: 150px;
+}
+.button-container {
+    /* margin: 25px; */
+    /* position: relative; */
+    right: 100px;
+    top: 170px;
+    color: white;
+}
+
+.sub-container {
+    height: 158px;
+}
+
+.btn-img {
+    height: 60px;
+    width: auto;
+}
+#message {
+    color: black;
+    height: 80px;
+    width: 250px;
+    background-color: lightgrey;
+    border-radius: 25px;
+    /* position: absolute; */
+    top: 500px;
+    right: 200px;
+}
+#message p {
+    font-size: 12px;
+    justify-content: center;
+    text-align: center;
+}
+
+.hidden{
+    visibility: hidden;
+    display: none;
+    width: 0px;
+    height: 0px;
+    display: inline;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+/* .container {
+    position: relative;
+    width: 50%;
+  }
+   */
+  /* Make the image responsive */
+  /* .container img {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    padding-bottom: 50px;
+    border: 3px solid green;
+  }
+   */
+  /* Style the button and place it in the middle of the container/image */
+
+  /* .container .btn:hover {
+    background-color: black;
+  } */
