@@ -180,7 +180,7 @@ var game = {
         $("#enemyMaulButton").on("click", function() {
             $("#enemyMaulButton").addClass("hidden")
             $("#defenderMaulButton").removeClass("hidden");
-            $("#gameAction").html("Click Obi to attack him, and be careful.");
+            $("#gameAction").html("Click Maul to attack him, and be careful.");
             
             selectedDefender = maul;
             selectedDefenderHtml = $("#defenderMaulButton");
